@@ -6,6 +6,9 @@ sudo apt-get install -y apache2 libapache2-mod-wsgi python-pip postgresql git li
 ###### USER SECTION #####
 echo Creating a new user grader
 sudo adduser --disabled-password --gecos "" grader
+echo Adding public key to newly created user authorized keys
+mkdir /home/grader/.ssh
+cat public_key.pub > /home/grader/.ssh/authorized_keys
 #https://askubuntu.com/questions/94060/run-adduser-non-interactively
 echo grader:Udacity12345 | chpasswd
 sudo passwd -e grader
