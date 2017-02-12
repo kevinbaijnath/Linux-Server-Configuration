@@ -1,6 +1,7 @@
+#ASSUMES git is already installed
 ##### INSTALL PACKAGES ######
 echo Installing required packages
-sudo apt-get install -y apache2 libapache2-mod-wsgi postgresql git libpq-dev python-dev libpam-cracklib
+sudo apt-get install -y apache2 libapache2-mod-wsgi python-pip postgresql git libpq-dev python-dev libpam-cracklib
 #############################
 
 ###### USER SECTION #####
@@ -20,7 +21,7 @@ echo updating packages
 sudo apt-get update
 
 echo upgrading installed packages
-sudo apt-get upgrade
+sudo apt-get upgrade -y --force-yes
 #####################
 
 ##### CHANGE TIMEZONE #####
@@ -51,26 +52,30 @@ sudo ufw allow 80/tcp
 sudo ufw allow 123/tcp
 #####################
 
-##### CONFIGURE POSTGRES #####
-echo Configuring Postgres
-sudo -u postgres psql -c "CREATE USER catalog WITH PASSWORD 'test';"
-sudo -u postgres createdb -O catalog itemcatalog
-#https://help.ubuntu.com/community/Postg reSQL
-
-##### CONFIGURE APPLICATION #####
+##### OBTAINING APPLICATION #####
 echo Obtaining Item catalog
 git clone -b linuxserver https://github.com/kevinbaijnath/Item-Catalog
 cd Item-Catalog/vagrant/catalog
 
 echo Installing Application Packages
 sudo pip install -r requirements.txt
+#################################
 
+##### CONFIGURE POSTGRES #####
+echo Configuring Postgres
+sudo -u postgres psql -c "CREATE USER catalog WITH PASSWORD 'test';"
+sudo -u postgres createdb -O catalog itemcatalog
+#https://help.ubuntu.com/community/Postg reSQL
+###############################
+
+##### CONFIGURING APPLICATION #####
 echo Configuring Application
 python database_setup.py
 python populatecourses.py
 mv * /var/www/html/
-cd
+cd ../../../
 rm -r Item-Catalog
+###################################
 
 ##### CONFIGURE APACHE #####
 echo Configuring Apache
