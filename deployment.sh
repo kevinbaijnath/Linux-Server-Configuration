@@ -1,4 +1,3 @@
-#ASSUMES git is already installed
 ##### INSTALL PACKAGES ######
 echo Installing required packages
 sudo apt-get install -y apache2 libapache2-mod-wsgi python-pip postgresql git libpq-dev python-dev libpam-cracklib
