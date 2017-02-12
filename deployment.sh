@@ -1,12 +1,13 @@
 ##### INSTALL PACKAGES ######
 echo Installing required packages
-sudo apt-get install apache2 libapache2-mod-wsgi postgresql git libpq-dev python-dev libpam-cracklib
+sudo apt-get install -y apache2 libapache2-mod-wsgi postgresql git libpq-dev python-dev libpam-cracklib
 #############################
 
 ###### USER SECTION #####
 echo Creating a new user grader
-sudo adduser grader
-echo grader: | chpasswd
+sudo adduser --disabled-password --gecos "" grader
+#https://askubuntu.com/questions/94060/run-adduser-non-interactively
+echo grader:Udacity12345 | chpasswd
 sudo passwd -e grader
 #https://askubuntu.com/questions/244115/how-do-i-enforce-a-password-complexity-policy
 echo Granting the grader user sudo permissions
@@ -54,7 +55,7 @@ sudo ufw allow 123/tcp
 echo Configuring Postgres
 sudo -u postgres psql -c "CREATE USER catalog WITH PASSWORD 'test';"
 sudo -u postgres createdb -O catalog itemcatalog
-#https://help.ubuntu.com/community/PostgreSQL
+#https://help.ubuntu.com/community/Postg reSQL
 
 ##### CONFIGURE APPLICATION #####
 echo Obtaining Item catalog
