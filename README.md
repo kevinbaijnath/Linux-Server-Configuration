@@ -1,6 +1,12 @@
 # Linux-Server-Configuration
 
 This project enables deployment and setup of an application on a Linux VM.  
+
+## Accessing application
+[Website](http://ec2-52-37-248-241.us-west-2.compute.amazonaws.com/)
+IP Address: 52.37.248.241
+SSH Port: 2200
+
 ## Key Features
 * Automated configuration and deployment of application and security settings using a [deployment script](deployment.sh) [Item-Catalog](https://github.com/kevinbaijnath/Item-Catalog/tree/linuxserver) served by Apache
 * Postgres has been setup and configured for the Item-Catalog site

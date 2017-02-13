@@ -18,7 +18,9 @@ sudo adduser --disabled-password --gecos "" grader
 echo Adding public key to newly created user authorized keys
 mkdir /home/grader/.ssh
 cat Linux-Server-Configuration/public_key.pub > /home/grader/.ssh/authorized_keys
+chown grader:grader /home/grader/.ssh
 chmod 700 /home/grader/.ssh
+chown grader:grader /home/grader/.ssh/authorized_keys
 chmod 644 /home/grader/.ssh/authorized_keys
 echo grader:Udacity12345 | chpasswd
 echo Requiring user to change password upon first login
