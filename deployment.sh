@@ -44,7 +44,7 @@ echo Disabling Password Authentication
 sudo sed -ie 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 
 echo Disabling root login via SSH
-sudo sed -ie 's/PasswordAuthentication .*/PasswordAuthentication no/g' /etc/ssh/sshd_config
+sudo sed -ie 's/PermitRootLogin .*/PermitRootLogin no/g' /etc/ssh/sshd_config
 ######################
 
 ##### FIREWALL #####
@@ -85,11 +85,13 @@ rm -r Item-Catalog
 echo Configuring Apache
 #https://stackoverflow.com/questions/11694980/using-sed-insert-a-line-below-or-above-the-pattern
 sed -i '/<\/VirtualHost>/i \\tWSGIScriptAlias \/ \/var\/www\/html\/project.wsgi' /etc/apache2/sites-enabled/000-default.conf
-echo Restarting Apache
-sudo apache2ctl restart
 ###########################
 
 ##### SETUP SERVICES #####
+echo Restarting Apache
+sudo apache2ctl restart
+echo Restarting SSH
 service ssh restart
+echo Enabling firewall
 echo y | sudo ufw enable
 ##########################
