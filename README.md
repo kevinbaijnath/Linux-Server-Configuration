@@ -8,7 +8,8 @@ This project enables deployment and setup of an application on a Linux VM.
 * SSH Port: 2200
 
 ## Key Features
-* Automated configuration and deployment of application and security settings using a [deployment script](deployment.sh) [Item-Catalog](https://github.com/kevinbaijnath/Item-Catalog/tree/linuxserver) served by Apache
+* Automated configuration and deployment of application and security settings using a [deployment script](deployment.sh)
+* [Item-Catalog](https://github.com/kevinbaijnath/Item-Catalog/tree/linuxserver) served by Apache
 * Postgres has been setup and configured for the Item-Catalog site
 
 ## Summary Of Configuration Applied
