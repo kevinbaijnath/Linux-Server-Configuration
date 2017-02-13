@@ -1,3 +1,11 @@
+###### PACKAGES #####
+echo updating packages
+sudo apt-get update
+
+echo upgrading installed packages
+sudo apt-get upgrade -y --force-yes
+#####################
+
 ##### INSTALL PACKAGES ######
 echo Installing required packages
 sudo apt-get install -y apache2 libapache2-mod-wsgi python-pip postgresql git libpq-dev python-dev libpam-cracklib
@@ -6,12 +14,12 @@ sudo apt-get install -y apache2 libapache2-mod-wsgi python-pip postgresql git li
 ###### USER SECTION #####
 echo Creating a new user grader
 sudo adduser --disabled-password --gecos "" grader
+#https://askubuntu.com/questions/94060/run-adduser-non-interactively
 echo Adding public key to newly created user authorized keys
 mkdir /home/grader/.ssh
 cat Linux-Server-Configuration/public_key.pub > /home/grader/.ssh/authorized_keys
 chmod 700 /home/grader/.ssh
 chmod 644 /home/grader/.ssh/authorized_keys
-#https://askubuntu.com/questions/94060/run-adduser-non-interactively
 echo grader:Udacity12345 | chpasswd
 echo Requiring user to change password upon first login
 sudo passwd -e grader
@@ -19,14 +27,6 @@ echo Granting the grader user sudo permissions
 echo "grader ALL=(ALL) ALL" > grader
 sudo mv grader /etc/sudoers.d/
 #########################
-
-###### PACKAGES #####
-echo updating packages
-sudo apt-get update
-
-echo upgrading installed packages
-sudo apt-get upgrade -y --force-yes
-#####################
 
 ##### CHANGE TIMEZONE #####
 echo changing timezone to UTC
@@ -69,7 +69,7 @@ sudo pip install -r requirements.txt
 echo Configuring Postgres
 sudo -u postgres psql -c "CREATE USER catalog WITH PASSWORD 'test';"
 sudo -u postgres createdb -O catalog itemcatalog
-#https://help.ubuntu.com/community/Postg reSQL
+#https://help.ubuntu.com/community/PostgreSQL
 ###############################
 
 ##### CONFIGURING APPLICATION #####
