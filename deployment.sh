@@ -8,11 +8,13 @@ echo Creating a new user grader
 sudo adduser --disabled-password --gecos "" grader
 echo Adding public key to newly created user authorized keys
 mkdir /home/grader/.ssh
-cat public_key.pub > /home/grader/.ssh/authorized_keys
+cat Linux-Server-Configuration/public_key.pub > /home/grader/.ssh/authorized_keys
+chmod 700 /home/grader/.ssh
+chmod 644 /home/grader/.ssh/authorized_keys
 #https://askubuntu.com/questions/94060/run-adduser-non-interactively
 echo grader:Udacity12345 | chpasswd
+echo Requiring user to change password upon first login
 sudo passwd -e grader
-#https://askubuntu.com/questions/244115/how-do-i-enforce-a-password-complexity-policy
 echo Granting the grader user sudo permissions
 echo "grader ALL=(ALL) ALL" > grader
 sudo mv grader /etc/sudoers.d/
@@ -88,6 +90,6 @@ sudo apache2ctl restart
 ###########################
 
 ##### SETUP SERVICES #####
-#service ssh restart
-#echo y | sudo ufw enable
+service ssh restart
+echo y | sudo ufw enable
 ##########################
